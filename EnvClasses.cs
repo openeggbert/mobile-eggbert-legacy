@@ -18,11 +18,11 @@ namespace WindowsPhoneSpeedyBlupi
 
         public enum Impl
         {
-            MonoGame = ProgrammingLanguage.CSharp,
-            FNA = ProgrammingLanguage.CSharp,
-            KNI = ProgrammingLanguage.CSharp,
-            JXNA = ProgrammingLanguage.Java,
-            JSXNA = ProgrammingLanguage.JavaScript
+            MonoGame,
+            FNA,
+            KNI,
+            JXNA,
+            JSXNA
         }
 
         public enum ProgrammingLanguage
@@ -37,55 +37,63 @@ namespace WindowsPhoneSpeedyBlupi
 
     public static class Extensions
     {
-        public static ProgrammingLanguage getProgrammingLanguage(this Impl xnaImpl)
+        public static ProgrammingLanguage getProgrammingLanguage(this Impl impl)
         {
-            return (ProgrammingLanguage)((int)xnaImpl);
+            switch (impl)
+            {
+                case Impl.MonoGame: return ProgrammingLanguage.CSharp;
+                case Impl.FNA: return ProgrammingLanguage.CSharp;
+                case Impl.KNI: return ProgrammingLanguage.CSharp;
+                case Impl.JXNA: return ProgrammingLanguage.Java;
+                case Impl.JSXNA: return ProgrammingLanguage.JavaScript;
+                default: throw new System.Exception("Unsupported Impl: " + impl);
+            }
         }
-        public static bool isMonoGame(this Impl xnaImpl)
+        public static bool isMonoGame(this Impl impl)
         {
-            return xnaImpl == Impl.MonoGame;
+            return impl == Impl.MonoGame;
         }
-        public static bool isFNA(this Impl xnaImpl)
+        public static bool isFNA(this Impl impl)
         {
-            return xnaImpl == Impl.FNA;
-        }
-
-        public static bool isKNI(this Impl xnaImpl)
-        {
-            return xnaImpl == Impl.KNI;
-        }
-
-        public static bool isJXNA(this Impl xnaImpl)
-        {
-            return xnaImpl == Impl.JXNA;
+            return impl == Impl.FNA;
         }
 
-        public static bool isJSXNA(this Impl xnaImpl)
+        public static bool isKNI(this Impl impl)
         {
-            return xnaImpl == Impl.JSXNA;
-        }
-        public static bool isNotMonoGame(this Impl xnaImpl)
-        {
-            return xnaImpl != Impl.MonoGame;
-        }
-        public static bool isNotFNA(this Impl xnaImpl)
-        {
-            return xnaImpl != Impl.FNA;
+            return  impl == Impl.KNI;
         }
 
-        public static bool isNotKNI(this Impl xnaImpl)
+        public static bool isJXNA(this Impl impl)
         {
-            return xnaImpl != Impl.KNI;
+            return impl == Impl.JXNA;
         }
 
-        public static bool isNotJXNA(this Impl xnaImpl)
+        public static bool isJSXNA(this Impl impl)
         {
-            return xnaImpl != Impl.JXNA;
+            return impl == Impl.JSXNA;
+        }
+        public static bool isNotMonoGame(this Impl impl)
+        {
+            return impl != Impl.MonoGame;
+        }
+        public static bool isNotFNA(this Impl impl)
+        {
+            return impl != Impl.FNA;
         }
 
-        public static bool isNotJSXNA(this Impl xnaImpl)
+        public static bool isNotKNI(this Impl impl)
         {
-            return xnaImpl != Impl.JSXNA;
+            return impl != Impl.KNI;
+        }
+
+        public static bool isNotJXNA(this Impl impl)
+        {
+            return impl != Impl.JXNA;
+        }
+
+        public static bool isNotJSXNA(this Impl impl)
+        {
+            return impl != Impl.JSXNA;
         }
         //
         public static bool isDesktop(this Platform platform)
