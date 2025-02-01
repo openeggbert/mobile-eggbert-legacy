@@ -309,7 +309,7 @@ namespace WindowsPhoneSpeedyBlupi
             }
 
             KeyboardState newKeyboardState = Keyboard.GetState();
-            Keys[] keysToBeChecked = new Keys[6] { Keys.LeftControl, Keys.Up, Keys.Right, Keys.Down, Keys.Left, Keys.Space };
+            Keys[] keysToBeChecked = new Keys[7] { Keys.LeftControl, Keys.Up, Keys.Right, Keys.Down, Keys.Left, Keys.Space, Keys.Escape,};
             foreach(Keys keys in keysToBeChecked) {
                 if (newKeyboardState.IsKeyDown(keys)) touchesOrClicks.Add(new TinyPoint(-1, (int)keys));
             }
@@ -360,6 +360,7 @@ namespace WindowsPhoneSpeedyBlupi
                         {
                             case Keys.LeftControl: pressedGlyph = Def.ButtonGlyph.PlayJump; pressedGlyphs.Add(pressedGlyph); break;
                             case Keys.Space: pressedGlyph = Def.ButtonGlyph.PlayAction; pressedGlyphs.Add(pressedGlyph); break;
+                            case Keys.Escape: pressedGlyph = Def.ButtonGlyph.PlayPause; pressedGlyphs.Add(pressedGlyph); break;
                         }
                     }
 

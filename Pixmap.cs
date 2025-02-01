@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
 using WindowsPhoneSpeedyBlupi;
 using static System.Net.Mime.MediaTypeNames;
 using static WindowsPhoneSpeedyBlupi.Def;
@@ -382,21 +383,35 @@ namespace WindowsPhoneSpeedyBlupi
             DrawIcon(channel, icon, rect, opacity, 0.0, useHotSpot);
         }
 
-        public void DrawIcon(int channel, int icon, TinyRect rect, double opacity, double rotation, bool useHotSpot)
+        public void DrawIcon(int channel, int icon, TinyRect rect, double opacity, double rotationDeg, bool useHotSpot)
         {
             if (icon == -1)
             {
                 return;
+            }
+            if (channel == 14 && !TouchPanel.GetCapabilities().IsConnected) 
+            {
+                int[] padGameplayIconNumbers = new int[] { 0, 1, 2, 3, 30, 12, 23 };
+                foreach (int iconNumber in padGameplayIconNumbers)
+                {
+                    if(iconNumber == icon)
+                    {
+                        if(iconNumber == 1 && rect.LeftX > 100) { continue; }
+                        //Touch display is not connected and the icon is a gameplay icon. Nothing to do.
+                        return;
+                    }
+                }
+
             }
             Texture2D bitmap = GetBitmap(channel);
             if (bitmap == null)
             {
                 return;
             }
-            int num;
+            int bitmapGridX;
             int bitmapGridY;
             int iconWidth;
-            int num2;
+            int iconHeight;
             int gap;
             switch (channel)
             {
@@ -404,95 +419,95 @@ namespace WindowsPhoneSpeedyBlupi
                 case 11:
                 case 12:
                 case 13:
-                    num = 60;
+                    bitmapGridX = 60;
                     bitmapGridY = 60;
                     iconWidth = 60;
-                    num2 = 60;
+                    iconHeight = 60;
                     gap = 0;
                     break;
                 case 1:
-                    num = 64;
+                    bitmapGridX = 64;
                     bitmapGridY = 64;
                     iconWidth = 64;
-                    num2 = 64;
+                    iconHeight = 64;
                     gap = 1;
                     break;
                 case 10:
-                    num = 60;
+                    bitmapGridX = 60;
                     bitmapGridY = 60;
                     iconWidth = 60;
-                    num2 = 60;
+                    iconHeight = 60;
                     gap = 0;
                     break;
                 case 9:
-                    num = 144;
+                    bitmapGridX = 144;
                     bitmapGridY = 144;
-                    num2 = Tables.table_explo_size[icon];
-                    iconWidth = Math.Max(num2, 128);
+                    iconHeight = Tables.table_explo_size[icon];
+                    iconWidth = Math.Max(iconHeight, 128);
                     gap = 0;
                     break;
                 case 6:
-                    num = 32;
+                    bitmapGridX = 32;
                     bitmapGridY = 32;
                     iconWidth = 32;
-                    num2 = 32;
+                    iconHeight = 32;
                     gap = 0;
                     break;
                 case 4:
-                    num = 40;
+                    bitmapGridX = 40;
                     bitmapGridY = 40;
                     iconWidth = 40;
-                    num2 = 40;
+                    iconHeight = 40;
                     gap = 0;
                     break;
                 case 14:
-                    num = 140;
+                    bitmapGridX = 140;
                     bitmapGridY = 140;
                     iconWidth = 140;
-                    num2 = 140;
+                    iconHeight = 140;
                     gap = 0;
                     break;
                 case 15:
-                    num = 640;
+                    bitmapGridX = 640;
                     bitmapGridY = 160;
                     iconWidth = 640;
-                    num2 = 160;
+                    iconHeight = 160;
                     gap = 0;
                     break;
                 case 16:
-                    num = 410;
+                    bitmapGridX = 410;
                     bitmapGridY = 380;
                     iconWidth = 410;
-                    num2 = 380;
+                    iconHeight = 380;
                     gap = 0;
                     break;
                 case 17:
-                    num = 226;
+                    bitmapGridX = 226;
                     bitmapGridY = 226;
                     iconWidth = 226;
-                    num2 = 226;
+                    iconHeight = 226;
                     gap = 0;
                     break;
                 default:
-                    num = 0;
+                    bitmapGridX = 0;
                     bitmapGridY = 0;
                     iconWidth = 0;
-                    num2 = 0;
+                    iconHeight = 0;
                     gap = 0;
                     break;
             }
-            if (num != 0)
+            if (bitmapGridX != 0)
             {
-                Rectangle srcRectangle = GetSrcRectangle(bitmap, num, bitmapGridY, iconWidth, num2, gap, icon);
-                Rectangle rectangle = GetDstRectangle(rect, iconWidth, num2, useHotSpot);
-                float num3 = 0f;
-                if (rotation != 0.0)
+                Rectangle srcRectangle = GetSrcRectangle(bitmap, bitmapGridX, bitmapGridY, iconWidth, iconHeight, gap, icon);
+                Rectangle rectangle = GetDstRectangle(rect, iconWidth, iconHeight, useHotSpot);
+                float rotationRad = 0f;
+                if (rotationDeg != 0.0)
                 {
-                    num3 = (float)Misc.DegToRad(rotation);
-                    rectangle = Misc.RotateAdjust(rectangle, num3);
+                    rotationRad = (float)Misc.DegToRad(rotationDeg);
+                    rectangle = Misc.RotateAdjust(rectangle, rotationRad);
                 }
                 spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-                spriteBatch.Draw(bitmap, rectangle, srcRectangle, Color.FromNonPremultiplied(255, 255, 255, (int)(255.0 * opacity)), num3, origin, effect, 0f);
+                spriteBatch.Draw(bitmap, rectangle, srcRectangle, Color.FromNonPremultiplied(255, 255, 255, (int)(255.0 * opacity)), rotationRad, origin, effect, 0f);
                 spriteBatch.End();
             }
         }
