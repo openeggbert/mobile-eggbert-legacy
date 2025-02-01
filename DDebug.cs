@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
-using static WindowsPhoneSpeedyBlupi.EnvClasses;
 
 namespace WindowsPhoneSpeedyBlupi
 {
     public static class DDebug
     {
-        private static bool DETAILED_DEBUGGING { get; set; }
+        private static bool detailedDebugging = false;
+        private static bool DetailedDebugging
+        {
+            get { return detailedDebugging; }
+            set { detailedDebugging = value; }
+        }
         public static void WriteLine(String msg)
         {
-            if (DETAILED_DEBUGGING)
+            if (detailedDebugging)
             {
                 Debug.WriteLine(msg);
             }
