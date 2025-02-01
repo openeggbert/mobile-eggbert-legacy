@@ -288,14 +288,14 @@ namespace WindowsPhoneSpeedyBlupi
                     float widthHeightRatio = screenWidth / screenHeight;
                     float heightRatio = 480 / screenHeight;
                     float widthRatio = 640 / screenWidth;
-                    if(Env.DETAILED_DEBUGGING)
+                    
                     {
-                    Debug.WriteLine("-----");
-                    Debug.WriteLine("originalX=" + originalX);
-                    Debug.WriteLine("originalY=" + originalY);
-                    Debug.WriteLine("heightRatio=" + heightRatio);
-                    Debug.WriteLine("widthRatio=" + widthRatio);
-                    Debug.WriteLine("widthHeightRatio=" + widthHeightRatio);
+                    DDebug.WriteLine("-----");
+                    DDebug.WriteLine("originalX=" + originalX);
+                    DDebug.WriteLine("originalY=" + originalY);
+                    DDebug.WriteLine("heightRatio=" + heightRatio);
+                    DDebug.WriteLine("widthRatio=" + widthRatio);
+                    DDebug.WriteLine("widthHeightRatio=" + widthHeightRatio);
                     }
                     if (screenHeight> 480) {
                     touchOrClick.X = (int)(originalX * heightRatio);
@@ -303,8 +303,8 @@ namespace WindowsPhoneSpeedyBlupi
                     touchesOrClicks[i] = touchOrClick;
                     }
 
-                    if(Env.DETAILED_DEBUGGING) Debug.WriteLine("new X" + touchOrClick.X);
-                    if(Env.DETAILED_DEBUGGING) Debug.WriteLine("new Y" + touchOrClick.Y);
+                    DDebug.WriteLine("new X" + touchOrClick.X);
+                    DDebug.WriteLine("new Y" + touchOrClick.Y);
                 }
             }
 
@@ -316,7 +316,7 @@ namespace WindowsPhoneSpeedyBlupi
             if (newKeyboardState.IsKeyDown(Keys.F11))
             {
                 game1.ToggleFullScreen ();
-                Debug.WriteLine("F11 was pressed.");
+                DDebug.WriteLine("F11 was pressed.");
             }
 
             Boolean keyPressedUp = false;
@@ -347,9 +347,9 @@ namespace WindowsPhoneSpeedyBlupi
                     {
                         padPressed = true;
                     }
-                    Debug.WriteLine("padPressed=" + padPressed);
+                    DDebug.WriteLine("padPressed=" + padPressed);
                     Def.ButtonGlyph pressedGlyph = ButtonDetect(touchOrClick);
-                    Debug.WriteLine("buttonGlyph2 =" + pressedGlyph);
+                    DDebug.WriteLine("buttonGlyph2 =" + pressedGlyph);
                     if (pressedGlyph != 0)
                     {
                         pressedGlyphs.Add(pressedGlyph);
@@ -370,7 +370,7 @@ namespace WindowsPhoneSpeedyBlupi
                     switch (pressedGlyph)
                     {
                         case Def.ButtonGlyph.PlayJump:
-                            Debug.WriteLine("Jumping detected");
+                            DDebug.WriteLine("Jumping detected");
                             accelWaitZero = false;
                             keyPress |= 1;
                             break;
@@ -438,14 +438,14 @@ namespace WindowsPhoneSpeedyBlupi
             lastButtonDown = buttonGlyph;
             if (padPressed)
             {
-                Debug.WriteLine("PadCenter.X=" + PadCenter.X);
-                Debug.WriteLine("PadCenter.Y=" + PadCenter.Y);
-                Debug.WriteLine("padTouchPos.X=" + padTouchPos.X);
-                Debug.WriteLine("padTouchPos.Y=" + padTouchPos.Y);
-                Debug.WriteLine("keyPressedUp=" + keyPressedUp);
-                Debug.WriteLine("keyPressedDown=" + keyPressedDown);
-                Debug.WriteLine("keyPressedLeft=" + keyPressedLeft);
-                Debug.WriteLine(" keyPressedRight=" + keyPressedRight);
+                DDebug.WriteLine("PadCenter.X=" + PadCenter.X);
+                DDebug.WriteLine("PadCenter.Y=" + PadCenter.Y);
+                DDebug.WriteLine("padTouchPos.X=" + padTouchPos.X);
+                DDebug.WriteLine("padTouchPos.Y=" + padTouchPos.Y);
+                DDebug.WriteLine("keyPressedUp=" + keyPressedUp);
+                DDebug.WriteLine("keyPressedDown=" + keyPressedDown);
+                DDebug.WriteLine("keyPressedLeft=" + keyPressedLeft);
+                DDebug.WriteLine("keyPressedRight=" + keyPressedRight);
                 {
                     if (keyPressedUp)
                     {

@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using static WindowsPhoneSpeedyBlupi.EnvClasses;
 
 namespace WindowsPhoneSpeedyBlupi
 {
     public static class Env
     {
-        public static bool DETAILED_DEBUGGING { get; set; }
-
         public static Platform PLATFORM { get; private set; }
         public static Impl IMPL { get; private set; }
         public static bool INITIALIZED { get; private set; }
