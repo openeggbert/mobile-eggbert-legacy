@@ -14,6 +14,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 </PropertyGroup>
 
+<PropertyGroup>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+</PropertyGroup>
+
   <ItemGroup>
     <None Remove="icon.ico" />
     <None Remove="icon.bmp" />
