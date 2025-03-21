@@ -1,4 +1,4 @@
-﻿using WindowsPhoneSpeedyBlupi;
+using WindowsPhoneSpeedyBlupi;
 using static WindowsPhoneSpeedyBlupi.EnvClasses;
 
 static class Program

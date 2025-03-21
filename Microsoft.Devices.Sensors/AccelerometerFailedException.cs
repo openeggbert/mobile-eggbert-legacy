@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Devices.Sensors
+namespace Microsoft.Devices.Sensors
 {
     public class AccelerometerFailedException : SensorFailedException
     {

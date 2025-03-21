@@ -1,4 +1,4 @@
-﻿using Microsoft.Devices.Sensors;
+using Microsoft.Devices.Sensors;
 
 namespace Microsoft.Devices.Sensors
 {
