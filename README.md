@@ -5,18 +5,20 @@
 
 git submodule update --init --recursive
 cd FNA &&  git submodule update --init --recursive
-cd ../fnalibs &&  git submodule update --init --recursive && cd ..
 
 ## Apply patches
 
 cd FNA && git apply ../FNA.patch
-cd ../fnalibs && git apply ../fnalibs.patch && cd ..
 
 ## build
 
 cd mobile-eggbert-fna && dotnet build
 
-## Add libraries base on the platform
+## Add libraries based on the platform
+
+https://github.com/FNA-XNA/fnalibs-dailies
+
+Place these libraries into
 
 For Linux, add these files to directory mobile-eggbert-fna/mobile-eggbert-fna/bin/Debug/net4.0
 
