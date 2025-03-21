@@ -1,9 +1,6 @@
 [submodule "FNA"]
 	path = FNA
 	url = https://github.com/FNA-XNA/FNA.git
-[submodule "fnalibs"]
-	path = fnalibs
-	url = https://github.com/butter-cat-games/fnalibs.git
 [submodule "mobile-eggbert-fna/Content"]
 	path = mobile-eggbert-fna/Content
 	url = https://code.openeggbert.com/openeggbert/speedy-blupi-dadagames-content

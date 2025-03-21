@@ -21,7 +21,6 @@
   </ItemGroup>
     <ItemGroup>
     <ProjectReference Include="../FNA/FNA.Core.csproj" />
-    <ProjectReference Include="../fnalibs/fnalibs/fnalibs.csproj" />
   </ItemGroup>
 
 
