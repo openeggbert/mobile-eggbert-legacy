@@ -901,7 +901,7 @@ namespace WindowsPhoneSpeedyBlupi
             tinyPoint.X = 10;
             tinyPoint.Y = 20;
             TinyPoint pos = tinyPoint;
-            Text.DrawText(pixmap, pos, inputPad.TotalTouch.ToString(), 1.0);
+            Text.DrawText(pixmap, pos, inputPad.TotalTouchOrClick.ToString(), 1.0);
         }
 
         private void SetGamer(int gamer)

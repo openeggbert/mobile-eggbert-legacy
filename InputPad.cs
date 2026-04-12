@@ -41,7 +41,7 @@ namespace WindowsPhoneSpeedyBlupi
 
         private Def.ButtonGlyph buttonPressed;
 
-        private int touchCount;
+        private int touchOrClickCount;
 
         private bool accelStarted;
 
@@ -61,11 +61,11 @@ namespace WindowsPhoneSpeedyBlupi
 
         public TinyPoint PixmapOrigin { get; set; }
 
-        public int TotalTouch
+        public int TotalTouchOrClick
         {
             get
             {
-                return touchCount;
+                return touchOrClickCount;
             }
         }
 
@@ -246,7 +246,7 @@ namespace WindowsPhoneSpeedyBlupi
             if (Env.IMPL.isNotKNI())
             {
                 touches = TouchPanel.GetState();
-                touchCount = touches.Count;
+                touchOrClickCount = touches.Count;
             }
 
             List <TinyPoint> touchesOrClicks = new List<TinyPoint>();
@@ -265,7 +265,7 @@ namespace WindowsPhoneSpeedyBlupi
             MouseState mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                touchCount++;
+                touchOrClickCount++;
                 TinyPoint mouseClick = new TinyPoint(mouseState.X, mouseState.Y);
                 touchesOrClicks.Add(mouseClick);
             }
