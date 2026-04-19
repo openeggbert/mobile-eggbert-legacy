@@ -86,10 +86,10 @@ namespace WindowsPhoneSpeedyBlupi
                         num3 = 480.0 * (screenWidth / screenHeight);
                         num4 = 480.0;
                     }
-                    result.LeftX = 0;
-                    result.RightX = (int)num3;
-                    result.TopY = 0;
-                    result.BottomY = (int)num4;
+                    result.Left = 0;
+                    result.Right = (int)num3;
+                    result.Top = 0;
+                    result.Bottom = (int)num4;
                 }
                 return result;
             }
@@ -213,8 +213,8 @@ namespace WindowsPhoneSpeedyBlupi
                     {
                         DrawIcon(14, 0, rect, pressed ? 0.6 : 1.0, false);
                         TinyPoint tinyPoint = default(TinyPoint);
-                        tinyPoint.X = rect.LeftX + rect.Width / 2 - (int)originX;
-                        tinyPoint.Y = rect.TopY + 28;
+                        tinyPoint.X = rect.Left + rect.Width / 2 - (int)originX;
+                        tinyPoint.Y = rect.Top + 28;
                         TinyPoint pos = tinyPoint;
                         Text.DrawTextCenter(this, pos, Decor.GetCheatTinyText(glyph), 1.0);
                         break;
@@ -297,10 +297,10 @@ namespace WindowsPhoneSpeedyBlupi
             tinyPoint.Y = (int)originY;
             TinyPoint dest = tinyPoint;
             TinyRect tinyRect = default(TinyRect);
-            tinyRect.LeftX = 0;
-            tinyRect.TopY = 0;
-            tinyRect.RightX = 640;
-            tinyRect.BottomY = 480;
+            tinyRect.Left = 0;
+            tinyRect.Top = 0;
+            tinyRect.Right = 640;
+            tinyRect.Bottom = 480;
             TinyRect rect = tinyRect;
             DrawPart(3, dest, rect);
         }
@@ -310,10 +310,10 @@ namespace WindowsPhoneSpeedyBlupi
             pos.X = (int)((double)pos.X + originX);
             pos.Y = (int)((double)pos.Y + originY);
             TinyRect tinyRect = default(TinyRect);
-            tinyRect.LeftX = pos.X;
-            tinyRect.TopY = pos.Y;
-            tinyRect.RightX = pos.X + (int)(32.0 * size);
-            tinyRect.BottomY = pos.Y + (int)(32.0 * size);
+            tinyRect.Left = pos.X;
+            tinyRect.Top = pos.Y;
+            tinyRect.Right = pos.X + (int)(32.0 * size);
+            tinyRect.Bottom = pos.Y + (int)(32.0 * size);
             TinyRect rect = tinyRect;
             DrawIcon(6, rank, rect, 1.0, false);
         }
@@ -323,10 +323,10 @@ namespace WindowsPhoneSpeedyBlupi
             pos.X = (int)((double)pos.X + originX);
             pos.Y = (int)((double)pos.Y + originY);
             TinyRect tinyRect = default(TinyRect);
-            tinyRect.LeftX = pos.X;
-            tinyRect.TopY = pos.Y;
-            tinyRect.RightX = pos.X;
-            tinyRect.BottomY = pos.Y;
+            tinyRect.Left = pos.X;
+            tinyRect.Top = pos.Y;
+            tinyRect.Right = pos.X;
+            tinyRect.Bottom = pos.Y;
             TinyRect rect = tinyRect;
             DrawIcon(channel, rank, rect, 1.0, false);
         }
@@ -334,10 +334,10 @@ namespace WindowsPhoneSpeedyBlupi
         public void QuickIcon(int channel, int rank, TinyPoint pos)
         {
             TinyRect tinyRect = default(TinyRect);
-            tinyRect.LeftX = pos.X;
-            tinyRect.TopY = pos.Y;
-            tinyRect.RightX = pos.X;
-            tinyRect.BottomY = pos.Y;
+            tinyRect.Left = pos.X;
+            tinyRect.Top = pos.Y;
+            tinyRect.Right = pos.X;
+            tinyRect.Bottom = pos.Y;
             TinyRect rect = tinyRect;
             DrawIcon(channel, rank, rect, 1.0, true);
         }
@@ -345,10 +345,10 @@ namespace WindowsPhoneSpeedyBlupi
         public void QuickIcon(int channel, int rank, TinyPoint pos, double opacity, double rotation)
         {
             TinyRect tinyRect = default(TinyRect);
-            tinyRect.LeftX = pos.X;
-            tinyRect.TopY = pos.Y;
-            tinyRect.RightX = pos.X;
-            tinyRect.BottomY = pos.Y;
+            tinyRect.Left = pos.X;
+            tinyRect.Top = pos.Y;
+            tinyRect.Right = pos.X;
+            tinyRect.Bottom = pos.Y;
             TinyRect rect = tinyRect;
             DrawIcon(channel, rank, rect, opacity, rotation, true);
         }
@@ -370,7 +370,7 @@ namespace WindowsPhoneSpeedyBlupi
                 dest.X = (int)((double)dest.X + originX);
                 dest.Y = (int)((double)dest.Y + originY);
             }
-            Rectangle value = new Rectangle(rect.LeftX, rect.TopY, rect.Width, rect.Height);
+            Rectangle value = new Rectangle(rect.Left, rect.Top, rect.Width, rect.Height);
             Rectangle destinationRectangle = new Rectangle(dest.X, dest.Y, (int)((double)rect.Width * zoom), (int)((double)rect.Height * zoom));
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             spriteBatch.Draw(bitmap, destinationRectangle, value, Color.White);
@@ -396,7 +396,7 @@ namespace WindowsPhoneSpeedyBlupi
                 {
                     if(iconNumber == icon)
                     {
-                        if(iconNumber == 1 && rect.LeftX > 100) { continue; }
+                        if(iconNumber == 1 && rect.Left > 100) { continue; }
                         //Touch display is not connected and the icon is a gameplay icon. Nothing to do.
                         return;
                     }
@@ -527,8 +527,8 @@ namespace WindowsPhoneSpeedyBlupi
         {
             int num = ((rect.Width == 0) ? iconWidth : rect.Width);
             int num2 = ((rect.Height == 0) ? iconHeight : rect.Height);
-            int num3 = (int)((double)rect.LeftX * zoom);
-            int num4 = (int)((double)rect.TopY * zoom);
+            int num3 = (int)((double)rect.Left * zoom);
+            int num4 = (int)((double)rect.Top * zoom);
             int num5 = (int)((double)num3 + (double)num * zoom);
             int num6 = (int)((double)num4 + (double)num2 * zoom);
             if (useHotSpot && hotSpotZoom > 1.0)

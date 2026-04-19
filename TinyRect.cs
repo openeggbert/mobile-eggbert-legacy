@@ -5,27 +5,27 @@ namespace WindowsPhoneSpeedyBlupi
 {
     public struct TinyRect
     {
-        public int LeftX;
+        public int Left;
 
-        public int RightX;
+        public int Right;
 
-        public int TopY;
+        public int Top;
 
-        public int BottomY;
+        public int Bottom;
 
-        public TinyRect(int leftX, int rightX, int topY, int bottomY)
+        public TinyRect(int left, int right, int top, int bottom)
         {
-            LeftX = leftX;
-            RightX = rightX;
-            TopY = topY;
-            BottomY = bottomY;
+            Left = left;
+            Right = right;
+            Top = top;
+            Bottom = bottom;
         }
 
         public int Width
         {
             get
             {
-                return RightX - LeftX;
+                return Right - Left;
             }
         }
 
@@ -33,13 +33,13 @@ namespace WindowsPhoneSpeedyBlupi
         {
             get
             {
-                return BottomY - TopY;
+                return Bottom - Top;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("{0};{1};{2};{3}", LeftX, TopY, RightX, BottomY);
+            return string.Format("{0};{1};{2};{3}", Left, Top, Right, Bottom);
         }
     }
 
