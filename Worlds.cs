@@ -6,9 +6,8 @@ using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using WindowsPhoneSpeedyBlupi;
+
 #if KNI && Web
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;

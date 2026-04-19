@@ -13,14 +13,19 @@ namespace WindowsPhoneSpeedyBlupi
     {
         public static Rectangle RotateAdjust(Rectangle rect, double angle)
         {
-            TinyPoint tinyPoint = default(TinyPoint);
-            tinyPoint.X = rect.Width / 2;
-            tinyPoint.Y = rect.Height / 2;
-            TinyPoint p = tinyPoint;
-            TinyPoint tinyPoint2 = RotatePointRad(angle, p);
-            int num = tinyPoint2.X - p.X;
-            int num2 = tinyPoint2.Y - p.Y;
-            return new Rectangle(rect.Left - num, rect.Top - num2, rect.Width, rect.Height);
+            TinyPoint center = default(TinyPoint);
+            center.X = rect.Width / 2;
+            center.Y = rect.Height / 2;
+            TinyPoint originalCenter = center;
+            TinyPoint rotatedCenter = RotatePointRad(angle, originalCenter);
+            int offsetX = rotatedCenter.X - originalCenter.X;
+            int offsetY = rotatedCenter.Y - originalCenter.Y;
+            return new Rectangle(
+                rect.Left - offsetX, 
+                rect.Top - offsetY, 
+                rect.Width, 
+                rect.Height
+                );
         }
 
         public static TinyPoint RotatePointRad(double angle, TinyPoint p)
@@ -28,19 +33,19 @@ namespace WindowsPhoneSpeedyBlupi
             return RotatePointRad(default(TinyPoint), angle, p);
         }
 
-        public static TinyPoint RotatePointRad(TinyPoint center, double angle, TinyPoint p)
+        public static TinyPoint RotatePointRad(TinyPoint center, double angle, TinyPoint point)
         {
-            TinyPoint tinyPoint = default(TinyPoint);
-            TinyPoint result = default(TinyPoint);
-            tinyPoint.X = p.X - center.X;
-            tinyPoint.Y = p.Y - center.Y;
-            double num = Math.Sin(angle);
-            double num2 = Math.Cos(angle);
-            result.X = (int)((double)tinyPoint.X * num2 - (double)tinyPoint.Y * num);
-            result.Y = (int)((double)tinyPoint.X * num + (double)tinyPoint.Y * num2);
-            result.X += center.X;
-            result.Y += center.Y;
-            return result;
+            TinyPoint relativePoint = default(TinyPoint);
+            TinyPoint rotatedPoint = default(TinyPoint);
+            relativePoint.X = point.X - center.X;
+            relativePoint.Y = point.Y - center.Y;
+            double sinAngle = Math.Sin(angle);
+            double cosAngle = Math.Cos(angle);
+            rotatedPoint.X = (int)((double)relativePoint.X * cosAngle - (double)relativePoint.Y * sinAngle);
+            rotatedPoint.Y = (int)((double)relativePoint.X * sinAngle + (double)relativePoint.Y * cosAngle);
+            rotatedPoint.X += center.X;
+            rotatedPoint.Y += center.Y;
+            return rotatedPoint;
         }
 
         public static double DegToRad(double angle)
@@ -48,7 +53,7 @@ namespace WindowsPhoneSpeedyBlupi
             return angle * Math.PI / 180.0;
         }
 
-        public static int Approch(int actual, int final, int step)
+        public static int Approach(int actual, int final, int step)
         {
             if (actual < final)
             {
