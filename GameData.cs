@@ -8,7 +8,9 @@ namespace WindowsPhoneSpeedyBlupi
 
     public class GameData
     {
-        private static readonly int HeaderLength = 10;
+        private static readonly int SaveHeaderLength = 10;
+        
+        private static readonly int GamerHeaderLength = 10;
 
         private static readonly int DoorsLength = 200;
 
@@ -16,7 +18,7 @@ namespace WindowsPhoneSpeedyBlupi
 
         private static readonly int MaxGamer = 3;
 
-        private static readonly int TotalLength = HeaderLength + GamerLength * MaxGamer;
+        private static readonly int TotalLength = SaveHeaderLength + GamerLength * MaxGamer;
 
         private readonly byte[] data;
 
@@ -151,7 +153,7 @@ namespace WindowsPhoneSpeedyBlupi
         {
             for (int i = 0; i < DoorsLength; i++)
             {
-                doors[i] = data[GamerOffset + 10 + i];
+                doors[i] = data[GamerOffset + GamerHeaderLength + i];
             }
         }
 
@@ -159,7 +161,7 @@ namespace WindowsPhoneSpeedyBlupi
         {
             for (int i = 0; i < DoorsLength; i++)
             {
-                data[GamerOffset + 10 + i] = (byte)doors[i];
+                data[GamerOffset + GamerHeaderLength + i] = (byte)doors[i];
             }
         }
 
@@ -169,7 +171,7 @@ namespace WindowsPhoneSpeedyBlupi
             secondaryDoors = 0;
             for (int i = 0; i < 180; i++)
             {
-                if (data[GetGamerOffset(gamer) + 10 + i] == 1)
+                if (data[GetGamerOffset(gamer) + GamerHeaderLength + i] == 1)
                 {
                     secondaryDoors++;
                 }
@@ -177,7 +179,7 @@ namespace WindowsPhoneSpeedyBlupi
             mainDoors = 0;
             for (int j = 180; j < 200; j++)
             {
-                if (data[GetGamerOffset(gamer) + 10 + j] == 1)
+                if (data[GetGamerOffset(gamer) + GamerHeaderLength + j] == 1)
                 {
                     mainDoors++;
                 }
@@ -207,13 +209,13 @@ namespace WindowsPhoneSpeedyBlupi
             data[GetGamerOffset(gamer) + 1] = 1;
             for (int i = 0; i < DoorsLength; i++)
             {
-                data[GetGamerOffset(gamer) + 10 + i] = 0;
+                data[GetGamerOffset(gamer) + GamerHeaderLength + i] = 0;
             }
         }
 
         private int GetGamerOffset(int gamer)
         {
-            return HeaderLength + GamerLength * gamer;
+            return SaveHeaderLength + GamerLength * gamer;
         }
     }
 

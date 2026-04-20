@@ -211,13 +211,13 @@ namespace WindowsPhoneSpeedyBlupi
             if (!string.IsNullOrEmpty(text))
             {
                 int y = pos.Y;
-                int num = 0;
+                int accumulatedWidth = 0;
                 foreach (char c in text)
                 {
                     int charWidth = GetCharWidth(c, size);
                     DrawChar(pixmap, ref pos, c, size);
-                    num += charWidth;
-                    pos.Y = y + num / pente;
+                    accumulatedWidth += charWidth;
+                    pos.Y = y + accumulatedWidth / pente;
                 }
             }
         }
@@ -239,12 +239,12 @@ namespace WindowsPhoneSpeedyBlupi
             {
                 return 0;
             }
-            int num = 0;
+            int result = 0;
             foreach (char c in text)
             {
-                num += GetCharWidth(c, size);
+                result += GetCharWidth(c, size);
             }
-            return num;
+            return result;
         }
 
         private static int GetOffset(char c)
