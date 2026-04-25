@@ -73,16 +73,16 @@ namespace WindowsPhoneSpeedyBlupi
             m_bRedraw = false;
             if (!m_bHide)
             {
-                int num = m_level * 114 / 100;
+                int filledWidth = m_level * 114 / 100;
                 rect.Left = 0;
                 rect.Right = 124;
                 rect.Top = 0;
                 rect.Bottom = 22;
                 m_pixmap.DrawPart(5, m_pos, rect, m_zoom);
-                if (num > 0)
+                if (filledWidth > 0)
                 {
                     rect.Left = 0;
-                    rect.Right = 6 + num;
+                    rect.Right = 6 + filledWidth;
                     rect.Top = 22 * m_mode;
                     rect.Bottom = 22 * (m_mode + 1);
                     m_pixmap.DrawPart(5, m_pos, rect, m_zoom);
