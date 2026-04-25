@@ -74,22 +74,22 @@ namespace WindowsPhoneSpeedyBlupi
                 }
                 if (screenWidth != 0.0 && screenHeight != 0.0)
                 {
-                    double num3;
-                    double num4;
+                    double drawWidth;
+                    double drawHeight;
                     if (screenWidth / screenHeight < 1.3333333333333333)
                     {
-                        num3 = 640.0;
-                        num4 = 640.0 * (screenHeight / screenWidth);
+                        drawWidth = 640.0;
+                        drawHeight = 640.0 * (screenHeight / screenWidth);
                     }
                     else
                     {
-                        num3 = 480.0 * (screenWidth / screenHeight);
-                        num4 = 480.0;
+                        drawWidth = 480.0 * (screenWidth / screenHeight);
+                        drawHeight = 480.0;
                     }
                     result.Left = 0;
-                    result.Right = (int)num3;
+                    result.Right = (int)drawWidth;
                     result.Top = 0;
-                    result.Bottom = (int)num4;
+                    result.Bottom = (int)drawHeight;
                 }
                 return result;
             }
@@ -255,9 +255,9 @@ namespace WindowsPhoneSpeedyBlupi
             {
                 screenWidth = screenHeight * (640f / 480f);
             }
-            double val = screenWidth / 640.0;
-            double val2 = screenHeight / 480.0;
-            zoom = Math.Min(val, val2);
+            double widthScale = screenWidth / 640.0;
+            double heightScale = screenHeight / 480.0;
+            zoom = Math.Min(widthScale, heightScale);
             originX = (screenWidth - 640.0 * zoom) / 2.0;
             originY = (screenHeight - 480.0 * zoom) / 2.0;
         }
@@ -322,43 +322,24 @@ namespace WindowsPhoneSpeedyBlupi
         {
             pos.X = (int)((double)pos.X + originX);
             pos.Y = (int)((double)pos.Y + originY);
-            TinyRect tinyRect = default(TinyRect);
-            tinyRect.Left = pos.X;
-            tinyRect.Top = pos.Y;
-            tinyRect.Right = pos.X;
-            tinyRect.Bottom = pos.Y;
+            TinyRect tinyRect = new TinyRect(pos);
             TinyRect rect = tinyRect;
             DrawIcon(channel, rank, rect, 1.0, false);
         }
 
         public void QuickIcon(int channel, int rank, TinyPoint pos)
         {
-            TinyRect tinyRect = default(TinyRect);
-            tinyRect.Left = pos.X;
-            tinyRect.Top = pos.Y;
-            tinyRect.Right = pos.X;
-            tinyRect.Bottom = pos.Y;
-            TinyRect rect = tinyRect;
+            TinyRect rect = new TinyRect(pos);
             DrawIcon(channel, rank, rect, 1.0, true);
         }
 
         public void QuickIcon(int channel, int rank, TinyPoint pos, double opacity, double rotation)
         {
-            TinyRect tinyRect = default(TinyRect);
-            tinyRect.Left = pos.X;
-            tinyRect.Top = pos.Y;
-            tinyRect.Right = pos.X;
-            tinyRect.Bottom = pos.Y;
-            TinyRect rect = tinyRect;
+            TinyRect rect = new TinyRect(pos);
             DrawIcon(channel, rank, rect, opacity, rotation, true);
         }
 
-        public bool DrawPart(int channel, TinyPoint dest, TinyRect rect)
-        {
-            return DrawPart(channel, dest, rect, 1.0);
-        }
-
-        public bool DrawPart(int channel, TinyPoint dest, TinyRect rect, double zoom)
+        public bool DrawPart(int channel, TinyPoint dest, TinyRect rect, double zoom = 1.0)
         {
             Texture2D bitmap = GetBitmap(channel);
             if (bitmap == null)
@@ -397,7 +378,7 @@ namespace WindowsPhoneSpeedyBlupi
                     if(iconNumber == icon)
                     {
                         if(iconNumber == 1 && rect.Left > 100) { continue; }
-                        //Touch display is not connected and the icon is a gameplay icon. Nothing to do.
+                        // Touch display is not connected and the icon is a gameplay icon. Nothing to do.
                         return;
                     }
                 }
@@ -516,37 +497,37 @@ namespace WindowsPhoneSpeedyBlupi
         {
             int width = bitmap.Bounds.Width;
             int height = bitmap.Bounds.Height;
-            int num = icon % (width / bitmapGridX);
-            int num2 = icon / (width / bitmapGridX);
+            int column = icon % (width / bitmapGridX);
+            int row = icon / (width / bitmapGridX);
             bitmapGridX += gap;
             bitmapGridY += gap;
-            return new Rectangle(gap + num * bitmapGridX, gap + num2 * bitmapGridY, iconWidth, iconHeight);
+            return new Rectangle(gap + column * bitmapGridX, gap + row * bitmapGridY, iconWidth, iconHeight);
         }
 
         private Rectangle GetDstRectangle(TinyRect rect, int iconWidth, int iconHeight, bool useHotSpot)
         {
-            int num = ((rect.Width == 0) ? iconWidth : rect.Width);
-            int num2 = ((rect.Height == 0) ? iconHeight : rect.Height);
-            int num3 = (int)((double)rect.Left * zoom);
-            int num4 = (int)((double)rect.Top * zoom);
-            int num5 = (int)((double)num3 + (double)num * zoom);
-            int num6 = (int)((double)num4 + (double)num2 * zoom);
+            int finalWidth = ((rect.Width == 0) ? iconWidth : rect.Width);
+            int finalHeight = ((rect.Height == 0) ? iconHeight : rect.Height);
+            int scaledLeftX = (int)((double)rect.Left * zoom);
+            int scaledTopY = (int)((double)rect.Top * zoom);
+            int scaledRightX = (int)((double)scaledLeftX + (double)finalWidth * zoom);
+            int scaledBottomY = (int)((double)scaledTopY + (double)finalHeight * zoom);
             if (useHotSpot && hotSpotZoom > 1.0)
             {
-                num3 -= (int)hotSpotX;
-                num4 -= (int)hotSpotY;
-                num5 -= (int)hotSpotX;
-                num6 -= (int)hotSpotY;
-                num3 = (int)((double)num3 * hotSpotZoom);
-                num4 = (int)((double)num4 * hotSpotZoom);
-                num5 = (int)((double)num5 * hotSpotZoom);
-                num6 = (int)((double)num6 * hotSpotZoom);
-                num3 += (int)hotSpotX;
-                num4 += (int)hotSpotY;
-                num5 += (int)hotSpotX;
-                num6 += (int)hotSpotY;
+                scaledLeftX -= (int)hotSpotX;
+                scaledTopY -= (int)hotSpotY;
+                scaledRightX -= (int)hotSpotX;
+                scaledBottomY -= (int)hotSpotY;
+                scaledLeftX = (int)((double)scaledLeftX * hotSpotZoom);
+                scaledTopY = (int)((double)scaledTopY * hotSpotZoom);
+                scaledRightX = (int)((double)scaledRightX * hotSpotZoom);
+                scaledBottomY = (int)((double)scaledBottomY * hotSpotZoom);
+                scaledLeftX += (int)hotSpotX;
+                scaledTopY += (int)hotSpotY;
+                scaledRightX += (int)hotSpotX;
+                scaledBottomY += (int)hotSpotY;
             }
-            return new Rectangle(num3, num4, num5 - num3, num6 - num4);
+            return new Rectangle(scaledLeftX, scaledTopY, scaledRightX - scaledLeftX, scaledBottomY - scaledTopY);
         }
 
         private Texture2D GetBitmap(int channel)

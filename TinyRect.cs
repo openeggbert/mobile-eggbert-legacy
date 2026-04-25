@@ -20,6 +20,14 @@ namespace WindowsPhoneSpeedyBlupi
             Top = top;
             Bottom = bottom;
         }
+        public TinyRect(TinyPoint point)
+        {
+            Left = point.X;
+            Right = point.X;
+            Top = point.Y;
+            Bottom = point.Y;
+        }
+
 
         public int Width
         {
