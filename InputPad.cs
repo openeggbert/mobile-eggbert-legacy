@@ -7,7 +7,6 @@ using System.Linq;
 using Microsoft.Devices.Sensors;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-using static WindowsPhoneSpeedyBlupi.EnvClasses;
 
 namespace WindowsPhoneSpeedyBlupi
 {

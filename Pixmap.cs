@@ -370,7 +370,8 @@ namespace WindowsPhoneSpeedyBlupi
             {
                 return;
             }
-            if (channel == 14 && !TouchPanel.GetCapabilities().IsConnected) 
+            
+            if (Config.TOUCH_BUTTONS_SHOWN_ONLY_IF_TOUCHSCREEN_IS_AVAILABLE && channel == 14 && !TouchPanel.GetCapabilities().IsConnected) 
             {
                 int[] padGameplayIconNumbers = new int[] { 0, 1, 2, 3, 30, 12, 23 };
                 foreach (int iconNumber in padGameplayIconNumbers)
