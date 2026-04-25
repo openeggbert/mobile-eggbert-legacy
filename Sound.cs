@@ -159,13 +159,8 @@ namespace WindowsPhoneSpeedyBlupi
                 plays.RemoveAt(0);
             }
         }
-
-        public bool PlayImage(int channel, TinyPoint pos)
-        {
-            return PlayImage(channel, pos, -1, false);
-        }
-
-        public bool PlayImage(int channel, TinyPoint pos, int rank, bool bLoop)
+        
+        public bool PlayImage(int channel, TinyPoint pos, int rank = -1, bool bLoop = false)
         {
             if (!gameData.Sounds)
             {
