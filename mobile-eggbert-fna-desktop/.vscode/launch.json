@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md
+            "name": "Launch",
+            "type": "mono",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/mobile-eggbert-fna/bin/Debug/net4.0/mobile-eggbert-fna.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/mobile-eggbert-fna",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "env": {
+                "LD_LIBRARY_PATH": "${workspaceRoot}/fnalibs/fnalibs/lib/lib64/"
+            }
+        },
+        {
+            "name": "Attach",
+            "type": "mono",
+            "request": "attach"
+        }
+    ]
+}

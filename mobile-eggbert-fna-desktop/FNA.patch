@@ -1,0 +1,210 @@
+diff --git a/FNA.Core.csproj b/FNA.Core.csproj
+index 5c4dd1a..335a213 100644
+--- a/FNA.Core.csproj
++++ b/FNA.Core.csproj
+@@ -1,6 +1,6 @@
+ <Project Sdk="Microsoft.NET.Sdk">
+ 	<PropertyGroup>
+-		<TargetFramework>net8.0</TargetFramework>
++		<TargetFramework>net4.0</TargetFramework>
+ 	</PropertyGroup>
+ 	<PropertyGroup>
+ 		<EnableDefaultItems>false</EnableDefaultItems>
+diff --git a/abi/Microsoft.Xna.Framework.Game.cs b/abi/Microsoft.Xna.Framework.Game.cs
+index 18b303a..cfac6a3 100644
+--- a/abi/Microsoft.Xna.Framework.Game.cs
++++ b/abi/Microsoft.Xna.Framework.Game.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.IGameComponent))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.IUpdateable))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.GameComponent))]
+diff --git a/abi/Microsoft.Xna.Framework.Game.csproj b/abi/Microsoft.Xna.Framework.Game.csproj
+index 6873430..c646fb0 100644
+--- a/abi/Microsoft.Xna.Framework.Game.csproj
++++ b/abi/Microsoft.Xna.Framework.Game.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.GamerServices.cs b/abi/Microsoft.Xna.Framework.GamerServices.cs
+index 5c1b28c..50b7ac2 100644
+--- a/abi/Microsoft.Xna.Framework.GamerServices.cs
++++ b/abi/Microsoft.Xna.Framework.GamerServices.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.GamerServices.SignedInEventArgs))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.GamerServices.SignedOutEventArgs))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.GamerServices.InviteAcceptedEventArgs))]
+diff --git a/abi/Microsoft.Xna.Framework.GamerServices.csproj b/abi/Microsoft.Xna.Framework.GamerServices.csproj
+index c5382ab..66afa4d 100644
+--- a/abi/Microsoft.Xna.Framework.GamerServices.csproj
++++ b/abi/Microsoft.Xna.Framework.GamerServices.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Graphics.cs b/abi/Microsoft.Xna.Framework.Graphics.cs
+index b71e252..73beede 100644
+--- a/abi/Microsoft.Xna.Framework.Graphics.cs
++++ b/abi/Microsoft.Xna.Framework.Graphics.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Graphics.RenderTargetBinding))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Graphics.VertexBufferBinding))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Graphics.GraphicsDevice))]
+diff --git a/abi/Microsoft.Xna.Framework.Graphics.csproj b/abi/Microsoft.Xna.Framework.Graphics.csproj
+index 1312ccc..e89438c 100644
+--- a/abi/Microsoft.Xna.Framework.Graphics.csproj
++++ b/abi/Microsoft.Xna.Framework.Graphics.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Input.Touch.cs b/abi/Microsoft.Xna.Framework.Input.Touch.cs
+index b7ccfdf..dbf675b 100644
+--- a/abi/Microsoft.Xna.Framework.Input.Touch.cs
++++ b/abi/Microsoft.Xna.Framework.Input.Touch.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Input.Touch.GestureType))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Input.Touch.GestureSample))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Input.Touch.TouchCollection))]
+diff --git a/abi/Microsoft.Xna.Framework.Input.Touch.csproj b/abi/Microsoft.Xna.Framework.Input.Touch.csproj
+index ddcd898..fdfc853 100644
+--- a/abi/Microsoft.Xna.Framework.Input.Touch.csproj
++++ b/abi/Microsoft.Xna.Framework.Input.Touch.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Net.cs b/abi/Microsoft.Xna.Framework.Net.cs
+index 3e133ae..8ca694b 100644
+--- a/abi/Microsoft.Xna.Framework.Net.cs
++++ b/abi/Microsoft.Xna.Framework.Net.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Net.NetworkSessionEndedEventArgs))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Net.GamerJoinedEventArgs))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Net.GamerLeftEventArgs))]
+diff --git a/abi/Microsoft.Xna.Framework.Net.csproj b/abi/Microsoft.Xna.Framework.Net.csproj
+index 1a821e9..8b99048 100644
+--- a/abi/Microsoft.Xna.Framework.Net.csproj
++++ b/abi/Microsoft.Xna.Framework.Net.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Storage.cs b/abi/Microsoft.Xna.Framework.Storage.cs
+index 6061690..e6a1da0 100644
+--- a/abi/Microsoft.Xna.Framework.Storage.cs
++++ b/abi/Microsoft.Xna.Framework.Storage.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Storage.StorageDevice))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Storage.StorageContainer))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Storage.StorageDeviceNotConnectedException))]
+\ No newline at end of file
+diff --git a/abi/Microsoft.Xna.Framework.Storage.csproj b/abi/Microsoft.Xna.Framework.Storage.csproj
+index 188ca56..c5129ef 100644
+--- a/abi/Microsoft.Xna.Framework.Storage.csproj
++++ b/abi/Microsoft.Xna.Framework.Storage.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Video.cs b/abi/Microsoft.Xna.Framework.Video.cs
+index 04fd033..a476eb6 100644
+--- a/abi/Microsoft.Xna.Framework.Video.cs
++++ b/abi/Microsoft.Xna.Framework.Video.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Media.VideoSoundtrackType))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Media.Video))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Media.VideoPlayer))]
+\ No newline at end of file
+diff --git a/abi/Microsoft.Xna.Framework.Video.csproj b/abi/Microsoft.Xna.Framework.Video.csproj
+index 3ef8084..47d73c1 100644
+--- a/abi/Microsoft.Xna.Framework.Video.csproj
++++ b/abi/Microsoft.Xna.Framework.Video.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.Xact.cs b/abi/Microsoft.Xna.Framework.Xact.cs
+index 36eb974..2bc60c1 100644
+--- a/abi/Microsoft.Xna.Framework.Xact.cs
++++ b/abi/Microsoft.Xna.Framework.Xact.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Audio.RendererDetail))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Audio.Cue))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Audio.AudioStopOptions))]
+diff --git a/abi/Microsoft.Xna.Framework.Xact.csproj b/abi/Microsoft.Xna.Framework.Xact.csproj
+index b467ac6..047ccac 100644
+--- a/abi/Microsoft.Xna.Framework.Xact.csproj
++++ b/abi/Microsoft.Xna.Framework.Xact.csproj
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" ToolsVersion="8.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+diff --git a/abi/Microsoft.Xna.Framework.cs b/abi/Microsoft.Xna.Framework.cs
+index eade86d..0077bb1 100644
+--- a/abi/Microsoft.Xna.Framework.cs
++++ b/abi/Microsoft.Xna.Framework.cs
+@@ -1,6 +1,6 @@
+ using System.Reflection;
+ using System.Runtime.CompilerServices;
+-[assembly: AssemblyVersion("4.0.0.0")]
++[assembly: AssemblyVersion("8.0.0.0")]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Media.MediaState))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Input.Keyboard))]
+ [assembly: TypeForwardedToAttribute(typeof(Microsoft.Xna.Framework.Input.Mouse))]

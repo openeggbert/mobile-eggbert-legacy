@@ -1,0 +1,12 @@
+[submodule "FNA"]
+	path = FNA
+	url = https://github.com/FNA-XNA/FNA.git
+[submodule "mobile-eggbert-fna/Content"]
+	path = mobile-eggbert-fna/Content
+	url = https://code.openeggbert.com/openeggbert/speedy-blupi-dadagames-content
+[submodule "mobile-eggbert-fna/worlds"]
+	path = mobile-eggbert-fna/worlds
+	url = https://code.openeggbert.com/openeggbert/speedy-blupi-dadagames-worlds
+[submodule "mobile-eggbert-fna/WindowsPhoneSpeedyBlupi"]
+	path = mobile-eggbert-fna/WindowsPhoneSpeedyBlupi
+	url = https://code.openeggbert.com/openeggbert/mobile-eggbert-core
