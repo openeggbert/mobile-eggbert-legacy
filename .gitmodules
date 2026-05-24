@@ -1,0 +1,3 @@
+[submodule "mobile-eggbert-fna-desktop/FNA"]
+	path = mobile-eggbert-fna-desktop/FNA
+	url = https://github.com/FNA-XNA/FNA.git

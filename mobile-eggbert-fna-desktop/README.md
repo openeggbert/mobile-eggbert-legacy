@@ -3,8 +3,10 @@
 
 ## Init submodules
 
+``````
 git submodule update --init --recursive
 cd FNA &&  git submodule update --init --recursive
+```
 
 ## Apply patches
 
