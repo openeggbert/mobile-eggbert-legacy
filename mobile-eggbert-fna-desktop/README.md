@@ -3,7 +3,7 @@
 
 ## Init submodules
 
-``````
+```
 git submodule update --init --recursive
 cd FNA &&  git submodule update --init --recursive
 ```
@@ -24,7 +24,7 @@ Place these libraries into
 
 For Linux, add these files to directory mobile-eggbert-fna/mobile-eggbert-fna/bin/Debug/net4.0
 
-## Copy directories Content and worlds to directory mobile-eggbert-fna/mobile-eggbert-fna/bin/
+## Copy directories Content and worlds to directory mobile-eggbert-fna/mobile-eggbert-fna/bin/Debug/net4.0
 
 ## Run the game
 
