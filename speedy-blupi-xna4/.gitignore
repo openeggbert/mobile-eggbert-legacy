@@ -1,0 +1,17 @@
+# Build output: executable, compiled .xnb content, pipeline runner and intermediates.
+# Everything here is reproducible with scripts/build.sh.
+build/
+
+# Visual Studio / Rider / MonoDevelop
+[Bb]in/
+[Oo]bj/
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.sln.docstates
+
+# Wine / runtime leftovers
+*.log
