@@ -98,6 +98,33 @@ namespace WindowsPhoneSpeedyBlupi
             }
         }
 
+        // Pointer positions arrive in pixels, but everything InputPad hit-tests -- the buttons, the
+        // virtual pad, the slider -- lives in the DrawBounds space that GetDstRectangle scales by
+        // zoom on its way to the screen. The phone was always zoom 1, so the original code could
+        // hit-test the raw touch position; at any other resolution it cannot.
+        public TinyPoint ScreenToDraw(int x, int y)
+        {
+            TinyPoint result = default(TinyPoint);
+            if (zoom <= 0.0)
+            {
+                return result;
+            }
+            // Two steps, because the pointer and the back buffer need not share a scale. The mouse
+            // arrives in window client pixels; the back buffer is whatever fullscreen mode XNA
+            // settled on, and the driver stretches one onto the other. Only after folding that
+            // ratio in is the position in viewport pixels, which zoom then turns into DrawBounds
+            // units. When the mode matches the window both ratios are 1 and this is a plain
+            // divide by zoom.
+            double viewportWidth = graphics.GraphicsDevice.Viewport.Width;
+            double viewportHeight = graphics.GraphicsDevice.Viewport.Height;
+            Rectangle client = game1.Window.ClientBounds;
+            double stretchX = ((client.Width > 0) ? (viewportWidth / (double)client.Width) : 1.0);
+            double stretchY = ((client.Height > 0) ? (viewportHeight / (double)client.Height) : 1.0);
+            result.X = (int)((double)x * stretchX / zoom);
+            result.Y = (int)((double)y * stretchY / zoom);
+            return result;
+        }
+
         public Pixmap(Game1 game1, GraphicsDeviceManager graphics)
         {
             this.game1 = game1;

@@ -98,6 +98,9 @@ namespace WindowsPhoneSpeedyBlupi
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = true;
+            // The phone had no pointer to show; on the desktop the mouse is one of the two ways
+            // in, so the player has to be able to see where it is.
+            base.IsMouseVisible = true;
             base.Content.RootDirectory = "Content";
             base.TargetElapsedTime = TimeSpan.FromTicks(500000L);
             base.InactiveSleepTime = TimeSpan.FromSeconds(1.0);

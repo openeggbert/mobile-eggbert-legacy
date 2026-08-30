@@ -53,6 +53,22 @@ or, with the host's `wx` alias, from `build/bin`:
 wx SpeedyBlupi.exe
 ```
 
+### Controls
+
+The phone build only ever read the touch panel. On the desktop the mouse and the keyboard work as
+well, and all three stay live at once.
+
+| Input | Action |
+|---|---|
+| Left mouse button | Everything a finger did: menus, the virtual pad, the sensitivity slider |
+| Arrows / WASD | Move; down also crouches, the way the on-screen down button does |
+| Ctrl | Jump |
+| Space or Enter | Action — pick up, switch, board a vehicle |
+| Esc | Pause, and resume from the pause screen |
+
+Up climbs (`speedY = -1`, what ladders, swimming and the helicopter read); it is not a second jump
+key.
+
 `Game1` hardcodes `IsFullScreen = true` and never sets a preferred back buffer, so XNA picks the
 fullscreen mode itself. The art is drawn 1:1 for the phone's 800x480 screen and is cropped, not
 scaled, on a larger mode — an 800x480 display reproduces the original framing exactly. A Wine
@@ -71,3 +87,22 @@ virtual desktop does not pin it, because the game changes the display mode from 
 
 `Microsoft.Devices.Sensors` does not exist off the phone; the accelerometer stubs the FNA port
 already carries stand in for it, so the sensor code compiles unchanged and simply never reports.
+
+### Mouse and keyboard
+
+`InputPad.Update` used to walk the `TouchPanel` state directly. It now walks a list of *pointers*
+that merges the touch state with the mouse while its left button is down, so the menus, the virtual
+pad and the slider all work with a mouse through the code that was already there.
+
+Pointer positions go through `Pixmap.ScreenToDraw` first. The buttons, the pad and the slider are
+hit-tested in the `DrawBounds` space that `GetDstRectangle` scales by `zoom` on its way to the
+screen, and only at 800x480 is that zoom 1 — which is all the phone ever ran at, so the original
+code could hit-test the raw touch position. At 1280x1024 the zoom is 2 and every press landed at
+twice its true position, far outside the window; that is what made the cursor look dead. The same
+conversion fixes touch on any display that is not 800x480.
+
+Keys arrive on two paths. Movement is applied last, after the accelerometer leg — `Accelerometer.Start()`
+cannot report that a desktop has no sensor, so that leg would otherwise zero the pad and leave the
+game unsteerable if the sensor option is on. Keys that stand in for an on-screen button go through
+the same `buttonGlygh` variable as a touch, so the press/release edge detection and `ButtonPressed`
+behave identically.

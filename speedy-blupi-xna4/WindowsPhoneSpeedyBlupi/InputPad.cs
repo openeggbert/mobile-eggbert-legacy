@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Devices.Sensors;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using WindowsPhoneSpeedyBlupi;
 
@@ -52,6 +53,8 @@ namespace WindowsPhoneSpeedyBlupi
         private bool accelWaitZero;
 
         private int mission;
+
+        private KeyboardState keyboard;
 
         public Def.Phase Phase { get; set; }
 
@@ -254,16 +257,13 @@ namespace WindowsPhoneSpeedyBlupi
             int num3 = 0;
             padPressed = false;
             Def.ButtonGlygh buttonGlygh = Def.ButtonGlygh.None;
-            TouchCollection state = TouchPanel.GetState();
-            totalTouch = state.Count;
-            foreach (TouchLocation item in state)
+            keyboard = Keyboard.GetState();
+            List<TinyPoint> pointers = CollectPointers();
+            totalTouch = pointers.Count;
+            foreach (TinyPoint item in pointers)
             {
-                if (item.State == TouchLocationState.Pressed || item.State == TouchLocationState.Moved)
                 {
-                    TinyPoint tinyPoint = default(TinyPoint);
-                    tinyPoint.X = (int)item.Position.X;
-                    tinyPoint.Y = (int)item.Position.Y;
-                    TinyPoint tinyPoint2 = tinyPoint;
+                    TinyPoint tinyPoint2 = item;
                     if (!accelStarted && Misc.IsInside(GetPadBounds(PadCenter, padSize), tinyPoint2))
                     {
                         padPressed = true;
@@ -336,6 +336,14 @@ namespace WindowsPhoneSpeedyBlupi
                     }
                 }
             }
+            if (buttonGlygh == Def.ButtonGlygh.None)
+            {
+                buttonGlygh = KeyboardButton();
+                if (buttonGlygh != Def.ButtonGlygh.None)
+                {
+                    pressedGlyphs.Add(buttonGlygh);
+                }
+            }
             if (buttonGlygh != 0 && buttonGlygh != Def.ButtonGlygh.PlayAction && buttonGlygh != Def.ButtonGlygh.Cheat11 && buttonGlygh != Def.ButtonGlygh.Cheat12 && buttonGlygh != Def.ButtonGlygh.Cheat21 && buttonGlygh != Def.ButtonGlygh.Cheat22 && buttonGlygh != Def.ButtonGlygh.Cheat31 && buttonGlygh != Def.ButtonGlygh.Cheat32 && lastButtonDown == Def.ButtonGlygh.None)
             {
                 TinyPoint tinyPoint3 = default(TinyPoint);
@@ -379,9 +387,87 @@ namespace WindowsPhoneSpeedyBlupi
                     num2 = 1.0;
                 }
             }
+            // Last, so the keys still steer when the accelerometer leg above has zeroed the pad:
+            // the desktop has no sensor, and Accelerometer.Start() cannot fail to tell us so.
+            ApplyKeyboardMovement(ref num, ref num2, ref num3);
             decor.SetSpeedX(num);
             decor.SetSpeedY(num2);
             decor.KeyChange(num3);
+        }
+
+        // A touch point and the mouse are the same thing to everything above: a position that is
+        // currently down. The phone only ever produced the former; on the desktop the left button
+        // stands in for a finger, so the menus, the virtual pad and the sensitivity slider all
+        // work with a mouse without a second code path.
+        private List<TinyPoint> CollectPointers()
+        {
+            List<TinyPoint> pointers = new List<TinyPoint>();
+            foreach (TouchLocation item in TouchPanel.GetState())
+            {
+                if (item.State == TouchLocationState.Pressed || item.State == TouchLocationState.Moved)
+                {
+                    pointers.Add(pixmap.ScreenToDraw((int)item.Position.X, (int)item.Position.Y));
+                }
+            }
+            MouseState mouse = Mouse.GetState();
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                pointers.Add(pixmap.ScreenToDraw(mouse.X, mouse.Y));
+            }
+            return pointers;
+        }
+
+        // Keys that stand in for an on-screen button. They go through the same buttonGlygh path as
+        // a touch, so the press/release edge detection and ButtonPressed behave identically.
+        private Def.ButtonGlygh KeyboardButton()
+        {
+            if (Phase == Def.Phase.Play)
+            {
+                if (keyboard.IsKeyDown(Keys.Escape))
+                {
+                    return Def.ButtonGlygh.PlayPause;
+                }
+                if (keyboard.IsKeyDown(Keys.Space) || keyboard.IsKeyDown(Keys.Enter))
+                {
+                    return Def.ButtonGlygh.PlayAction;
+                }
+            }
+            else if (Phase == Def.Phase.Pause && keyboard.IsKeyDown(Keys.Escape))
+            {
+                return Def.ButtonGlygh.PauseContinue;
+            }
+            return Def.ButtonGlygh.None;
+        }
+
+        private void ApplyKeyboardMovement(ref double speedX, ref double speedY, ref int keyPress)
+        {
+            if (keyboard.IsKeyDown(Keys.Left) || keyboard.IsKeyDown(Keys.A))
+            {
+                speedX -= 1.0;
+            }
+            if (keyboard.IsKeyDown(Keys.Right) || keyboard.IsKeyDown(Keys.D))
+            {
+                speedX += 1.0;
+            }
+            if (keyboard.IsKeyDown(Keys.Up) || keyboard.IsKeyDown(Keys.W))
+            {
+                speedY -= 1.0;
+            }
+            // Crouching is the pad's down direction and the PlayDown glyph at once, the way the
+            // on-screen button drives both.
+            if (keyboard.IsKeyDown(Keys.Down) || keyboard.IsKeyDown(Keys.S))
+            {
+                speedY += 1.0;
+                keyPress |= 4;
+            }
+            if (keyboard.IsKeyDown(Keys.LeftControl) || keyboard.IsKeyDown(Keys.RightControl))
+            {
+                keyPress |= 1;
+            }
+            if (speedX != 0.0 || speedY != 0.0 || keyPress != 0)
+            {
+                accelWaitZero = false;
+            }
         }
 
         private Def.ButtonGlygh ButtonDetect(TinyPoint pos)
